@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enjure - An Opinionated Clojure Web Framework</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger-menu');
+        const navList = document.querySelector('.nav-list');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navList.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navList.classList.remove('active');
+            });
+        });
+    });
+</script>
+</head>
+<body>
+   <header>
+    <nav>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#design-philosophy">Design Philosophy</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#structure">Structure</a></li>
+            <li><a href="#issues">Issues</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main>
+        <section id="home">
+            <h1>Enjure</h1>
+            <p>Every Clojure Developer's nightmare: An opinionated Clojure web framework.</p>
+            <a href="#usage" class="cta-button">Get Started</a>
+        </section>
+
+        <section id="usage">
+            <h2>Usage</h2>
+            <p>Enjure requires the base Clojure install with the command line tools.</p>
+            <h3>Installation</h3>
+            <pre><code>$ git clone https://github.com/janetacarr/enjure.git && cd enjure
+$ clj -T:build install-cli</code></pre>
+            <p><em>Note: You'll possibly be prompted for a password as the enjure CLI requires root permissions to install. (Supports Linux / Mac OS only right now)</em></p>
+            <h3>Creating a Project</h3>
+            <pre><code>$ cd ~
+$ enjure new hello-enjure && cd hello-enjure
+$ enjure serve</code></pre>
+            <h3>CLI Commands</h3>
+            <ul>
+                <li><strong>serve</strong> - Starts the web server</li>
+                <li><strong>notes</strong> - Print all NOTES, FIXME, HACK, and TODO in project.</li>
+                <li><strong>generate</strong> - Create a new controller, page, entity, or migration.</li>
+                <li><strong>destroy</strong> - Delete a new controller, page, entity, or migration.</li>
+                <li><strong>migrate</strong> - Run the database migrations.</li>
+                <li><strong>help</strong> - Print this message.</li>
+            </ul>
+        </section>
+      
+        <section id="design-philosophy">
+    <h2>Design Philosophy</h2>
+    <p>Enjure revolves around a few core concepts:</p>
+    <ul>
+        <li><strong>Easy to get going, and easy to keep going.</strong>
+            <ul>
+                <li>Enjure provides a tight toolchain for easy project setup and scalable architecture to support long-term growth.</li>
+            </ul>
+        </li>
+        <li><strong>Less components means less complexity.</strong>
+            <ul>
+                <li>Enjure aims to use minimal components to achieve its goals, avoiding unnecessary complexity.</li>
+            </ul>
+        </li>
+        <li><strong>Convention over configuration.</strong>
+            <ul>
+                <li>Enjure limits configuration to reduce errors and streamline development.</li>
+            </ul>
+        </li>
+        <li><strong>Real value over re-packaging.</strong>
+            <ul>
+                <li>Enjure focuses on innovative software design rather than just repackaging existing libraries.</li>
+            </ul>
+        </li>
+        <li><strong>Your opinion, your library.</strong>
+            <ul>
+                <li>Enjure embraces being opinionated to provide clear direction and reduce decision fatigue.</li>
+            </ul>
+        </li>
+        <li><strong>A holistic approach.</strong>
+            <ul>
+                <li>Enjure considers the interoperability and impact of all components in the system.</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+        <section id="architecture">
+            <h2>Architecture</h2>
+            <p>Enjure follows a modified Model-View-Controller (MVC) architecture, tailored for Clojure development:</p>
+            <ul>
+                <li><strong>Model:</strong> Represents the data structure. <em>(Note: Currently not implemented)</em></li>
+                <li><strong>View:</strong> Handled by the 'pages' in Enjure, responsible for rendering the user interface.</li>
+                <li><strong>Controller:</strong> Manages the flow of data between Model and View, handling user inputs and system responses.</li>
+            </ul>
+            <p>Key architectural features:</p>
+            <ul>
+                <li>Opinionated structure for rapid development</li>
+                <li>Built-in routing system (though currently slower compared to Reitit)</li>
+                <li>Separation of concerns with distinct directories for controllers and pages</li>
+                <li>Future plans for database migrations and entity management</li>
+            </ul>
+            <p>Enjure aims to provide a structured yet flexible framework for Clojure web development, allowing developers to focus on building features rather than setting up boilerplate code.</p>
+        </section>
+
+        <section id="structure">
+            <h2>Structure</h2>
+            <p>Enjure follows the typical MVC architecture:</p>
+            <pre><code>$ cd hello-enjure && tree .
+├── deps.edn
+├── enjure.edn
+└── src
+    └── hello_enjure
+        ├── controllers
+        │   └── signin.clj
+        ├── core.clj
+        └── pages
+            └── index.clj</code></pre>
+            <p><em>(Model is missing because it hasn't been implemented yet)</em></p>
+        </section>
+
+        <section id="issues">
+            <h2>Known Issues</h2>
+            <ul>
+                <li>No models / entities / migrations (yet).</li>
+                <li>No controllers request coercion for params (yet).</li>
+                <li>Router adds 'ghost' path params.</li>
+                <li>Router slow AF compared to Reitit.</li>
+            </ul>
+            <h3>Unknown Issues</h3>
+            <p>Probably plenty, just haven't found them yet.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Janet A. Carr. Distributed under the Eclipse Public License version 1.0.</p>
+    </footer>
+  <a href="https://github.com/janetacarr/enjure?tab=readme-ov-file#enjure" class="github-corner" aria-label="View source on GitHub">
+  <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#ff1493; color:#fff0f5; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+    <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+  </svg>
+</a>
+</a>
+</body>
+</html>
